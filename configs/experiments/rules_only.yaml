@@ -1,0 +1,3 @@
+arm: rules_only
+pipeline: ../pipeline.yaml
+model: none

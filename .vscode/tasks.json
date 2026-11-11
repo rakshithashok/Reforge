@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run rules-only seed benchmark",
+			"type": "shell",
+			"command": "./.venv/bin/python",
+			"args": [
+				"-m",
+				"bench.run",
+				"--manifest",
+				"bench/corpus.yaml",
+				"--config",
+				"configs/experiments/rules_only.yaml",
+				"--output",
+				"results/rules-only-seed"
+			],
+			"isBackground": false
+		}
+	]
+}

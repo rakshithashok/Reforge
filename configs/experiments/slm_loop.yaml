@@ -1,0 +1,5 @@
+arm: slm_loop
+pipeline: ../pipeline.yaml
+model: local
+repair:
+  enabled: true

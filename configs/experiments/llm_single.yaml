@@ -1,0 +1,5 @@
+arm: llm_single
+pipeline: ../pipeline.yaml
+model: hosted
+repair:
+  enabled: false

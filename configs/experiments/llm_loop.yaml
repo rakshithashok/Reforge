@@ -1,0 +1,5 @@
+arm: llm_loop
+pipeline: ../pipeline.yaml
+model: hosted
+repair:
+  enabled: true

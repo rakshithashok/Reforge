@@ -77,11 +77,13 @@ All arms run on the same held-out repositories, with repeated trials because mod
 
 ## Results
 
-*Populated by `make bench`. Empty until the benchmark is run.*
+The initial rules-only seed run uses one pinned public repository and its focused
+regression module. It validates the harness, but it is not sufficient evidence
+to compare migration strategies.
 
 | Arm | Test pass rate | Build success | Cost / repo | p95 latency | Guard violations |
 |---|---|---|---|---|---|
-| `rules_only` | not yet run | | | | |
+| `rules_only` | 100% (1/1) | 100% (1/1) | $0.00 | 77.03 s | 0 |
 | `llm_single` | not yet run | | | | |
 | `llm_loop` | not yet run | | | | |
 | `slm_loop` | not yet run | | | | |
@@ -96,9 +98,13 @@ All arms run on the same held-out repositories, with repeated trials because mod
 git clone https://github.com/rakshithashok/reforge
 cd reforge
 pip install -e ".[dev]"
+docker build --tag reforge-sandbox:latest .
 
 # migrate a repo (rules + model, verified in the sandbox)
 reforge migrate ./path/to/repo --target sqlalchemy-2.0 --config configs/pipeline.yaml
+
+# apply only when the original and migrated test and coverage checks pass
+reforge migrate ./path/to/repo --verify --config configs/pipeline.yaml
 
 # only verify an existing migration against the original tests
 reforge verify ./path/to/repo
@@ -141,14 +147,15 @@ Reforge builds on, and should be compared against, existing work:
 
 ## Roadmap
 
-- [ ] Core types, Docker sandbox and verify runner on fixture repos
-- [ ] Rules-only baseline for SQLAlchemy 1.x → 2.0
-- [ ] Anti-gaming guards (tests untouched, coverage, minimal diff)
-- [ ] Benchmark harness, metrics and corpus manifest
+- [x] Core types, Docker sandbox and verify runner on fixture repos
+- [x] Rules-only baseline for SQLAlchemy 1.x → 2.0
+- [x] Anti-gaming guards (tests untouched, coverage, minimal diff)
+- [x] Benchmark harness, metrics and corpus manifest
 - [ ] LLM baselines and repair loop
-- [ ] Repo mining, training pairs and LoRA fine-tuning of the SLM
+- [x] Repo mining, training pairs and LoRA fine-tuning recipe
 - [ ] Audit report and CLI polish
-- [ ] CI, Docker image, full benchmark run and results
+- [x] CI and Docker image
+- [x] Rules-only seed benchmark and results
 
 ## Limitations
 

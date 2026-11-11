@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reforge-migrations"
+version = "0.1.0"
+description = "Test-verified code migration with deterministic rewrites and language models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "TBD" }
+dependencies = ["libcst>=1.1", "PyYAML>=6.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "coverage>=7.4", "ruff>=0.3"]
+models = ["httpx>=0.27"]
+training = ["datasets>=2.18", "transformers>=4.39", "peft>=0.10", "torch>=2.2"]
+
+[project.scripts]
+reforge = "reforge.cli:main"
+
+[tool.setuptools]
+packages = ["reforge", "reforge.models", "reforge.rules", "bench", "training"]
+package-dir = { reforge = "src/reforge" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

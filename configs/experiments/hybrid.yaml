@@ -1,0 +1,6 @@
+arm: hybrid
+pipeline: ../pipeline.yaml
+rules: sqlalchemy-2.0
+model: local
+repair:
+  enabled: true

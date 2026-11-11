@@ -1,0 +1,15 @@
+target: sqlalchemy-2.0
+verification:
+  docker_image: reforge-sandbox:latest
+  command: ["python", "-m", "pytest", "-q"]
+  timeout_seconds: 600
+  memory: 4g
+  cpus: 2
+  pids_limit: 256
+  coverage_command: ["coverage", "run", "-m", "pytest", "-q"]
+  coverage_report_command: ["coverage", "json", "-o", "/tmp/reforge-coverage.json"]
+repair:
+  max_iterations: 3
+  max_tokens: 12000
+  model: none
+  minimal_diff_ratio: 4.0
